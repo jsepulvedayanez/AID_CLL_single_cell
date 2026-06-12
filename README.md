@@ -52,13 +52,9 @@ Each patient has paired samples at two time points:
 * **scBCR-seq**: B-cell receptor profiling to assess clonotype structure and clonal relationships
 
 ## Main questions
-
-1. Which cell populations are present in peripheral blood at diagnosis and refractory disease?
-2. Which cells belong to the tumor clone?
-3. Which cells express AID-related programs?
-4. Is there a proliferative tumor-cell subpopulation?
-5. Are IFN-\u03b1, IFN-\u03b3, and KRAS pathways enriched in specific tumor cells?
-6. How do transcriptomic states and clonotypes change between diagnosis and refractory samples?
+1. Which cells express AID-related programs?
+2. Is there a proliferative tumor-cell subpopulation?
+3. Are IFN-\u03b1, IFN-\u03b3, and KRAS pathways enriched in specific tumor cells?
 
 ## Analysis workflow
 
@@ -67,11 +63,9 @@ Each patient has paired samples at two time points:
 3. Batch assessment across chips (MV1 / MV2)
 4. Cell clustering and annotation
 5. Identification of B cells and tumor cells
-6. Clonotype analysis using scBCR-seq
 7. Detection of AID-positive subpopulations
 8. Proliferation scoring and filtering, if applicable
 9. Pathway enrichment analysis
-10. Comparison of diagnosis versus refractory samples
 
 ## Important notes
 
