@@ -1,3 +1,7 @@
 .RData
 .Rhistory
 .Rproj.user/
+.DS_Store
+.venv/
+# Large saved Seurat/RDS objects
+data/merged_MV12.rds
