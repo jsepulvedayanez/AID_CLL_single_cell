@@ -46,6 +46,7 @@ Each patient has paired samples at two time points:
 | 477     | Diagnosis  | SID1 | MV2                   |
 | 477     | Refractory | SID1 | MV1                   |
 
+
 ## Data types
 
 * **scRNA-seq**: transcriptomic profiling of individual cells
@@ -63,13 +64,16 @@ Each patient has paired samples at two time points:
 3. Batch assessment across chips (MV1 / MV2)
 4. Cell clustering and annotation
 5. Identification of B cells and tumor cells
-7. Detection of AID-positive subpopulations
-8. Proliferation scoring and filtering, if applicable
-9. Pathway enrichment analysis
+6. Detection of AID-positive subpopulations
+7. Proliferation scoring and filtering, if applicable
+8. Pathway enrichment analysis
+
 
 ## Important notes
 
 * The dataset comes from **blood**, so it includes more than only B cells.
+* Diagnosis and refractory samples are expected to have strong **cell-composition imbalance**, with diagnosis enriched for B cells and refractory samples containing a more mixed blood-cell compartment.
+* The B-cell fraction is not equivalent to the tumor-cell fraction; tumor cells still need to be defined using clonotype and expression-based annotation.
 * The **proliferative fraction still needs to be defined by analysis**.
 * The chip/experiment information is important and should be considered during batch correction and interpretation.
 * Because samples are paired by patient and time point, comparisons should account for both **biological state** and **technical batch**.
@@ -100,4 +104,3 @@ figures/
 ## Status
 
 This project is in progress and is being organized for analysis and interpretation of paired scRNA-seq and scBCR-seq data in AID-positive CLL.
-
