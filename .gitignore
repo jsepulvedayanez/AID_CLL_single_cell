@@ -5,3 +5,4 @@
 .venv/
 # Large saved Seurat/RDS objects
 data/merged_MV12.rds
+results/*.rds

@@ -78,17 +78,35 @@ Each patient has paired samples at two time points:
 * The chip/experiment information is important and should be considered during batch correction and interpretation.
 * Because samples are paired by patient and time point, comparisons should account for both **biological state** and **technical batch**.
 
-## Suggested repository structure
+## Repository structure
 
 ```text
 README.md
-data/
-metadata/
-scripts/
+data/                            # datos crudos (matrices 10x .h5, Seurat .rds)
 notebooks/
-results/
-figures/
+  preproccesing.ipynb             # QC, integración, clustering (Seurat v5)
+  cell_annotation.ipynb           # anotación + Q1/Q2/Q3 (corregido y ejecutado)
+  cell_annotation_original.ipynb  # versión previa (anotación con errores)
+scripts/
+  optimized_annotation.R          # anotación corregida (12 clusters)
+  Q3_dx_vs_ref_pooled.R           # análisis de vías Dx vs Ref (pooled)
+  Q3_DE_filtered_and_kegg.R       # DE filtrado (IG/TCR/mito/ribo/hb) + GSEA KEGG
+  make_figures.R                  # figuras base (UMAP, AICDA, MKI67)
+  make_figures_subset.R           # figuras 05 (completo) y 06 (subset 433 vs 433)
+  _build_notebook.py              # construye cell_annotation.ipynb (nbformat)
+results/                          # salidas (CSV + RDS anotado, no se trackea .rds)
+figures/                          # figuras PNG (05 completo, 06 subset justo)
 ```
+
+## Results (resumen)
+
+Análisis ejecutado en `notebooks/cell_annotation.ipynb`. Células B tumorales = demux "Bcell" + ≥1 marcador B (MS4A1/CD79A/CD19) → **8.954 células** (8.521 diagnóstico, 433 refractario).
+
+1. **AID:** AICDA detectable en 20/14.550 células (0,14%); 17 son B tumorales, con el programa AID enriquecido en el cluster proliferativo (CLL_B_prolif).
+2. **Proliferación:** subpoblación proliferativa (cluster 6, MKI67/TOP2A/PCNA/STMN1); fracción MKI67+ ≈0,2% (CLL quiescente).
+3. **Vías (Dx vs Ref, pooled, solo B tumorales):** con comparación justa (submuestreo 433 vs 433 estratificado por sujeto, 20 semillas): **IFN-α/IFN-γ ↑ en refractario** (Cliff δ ≈ −0,41/−0,39), **KRAS ↑ en diagnóstico** (δ ≈ +0,14).
+4. **Enriquecimiento (GSEA):** diagnóstico muestra un programa **metabólico/proliferativo** — OXPHOS (NES 1.61), glicólisis, mTORC1, MYC, y **RIBOSOMA** (KEGG, NES 1.92, padj 1e-21).
+5. **Pseudobulk DESeq2 (n=4):** tras filtrar IG/TCR/mito/ribo/hb, 19 genes DE (padj<0.05). ↑ diagnóstico: JUN, TSC22D3, OTUD1; ↑ refractario: CDK6, SOX4, HCK, CD9, MARCKS, GAS6 (más GNLY/GZMB = contaminación NK residual). Baja confianza por n=4 y contaminación clonal.
 
 ## Suggested output folders
 
